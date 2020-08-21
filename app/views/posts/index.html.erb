@@ -1,0 +1,27 @@
+<h1>HOLA</h1>
+<% if current_user.nil? %>
+<%= link_to 'Log In', new_user_session_path %>
+<% else %>
+<%= link_to 'Sign_out', destroy_user_session_path, :method => 'delete'  %>
+<%= link_to 'Post Something', new_posts_path %>
+<% end %>
+<table>
+  <tr>
+    <% if !current_user.nil? %>
+        <th>User</th>
+    <% end %>
+    <th>Post Title</th>
+    <th>Post Text</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @post.each do |post| %>
+    <tr>
+      <% if !current_user.nil?  %>
+        <td><%= post.user.username %></td>
+      <% end %>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+    </tr>
+  <% end %>
+</table>
